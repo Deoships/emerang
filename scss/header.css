@@ -1,0 +1,48 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.main-header {
+  background-color: #f3f2ed;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.logo img {
+  max-height: 100%;
+}
+
+.main-menu ul {
+  list-style: none;
+  display: flex;
+}
+.main-menu ul li {
+  margin-right: 30px;
+}
+.main-menu ul li a {
+  font-size: 16px;
+  color: #212121;
+  font-family: "Montserrat", Arial, sans-serif;
+  text-decoration: none;
+}
+
+.cart-icon {
+  margin-left: auto;
+  margin-right: 0;
+  margin-left: 50px;
+}
+
+.cart-icon img {
+  max-height: 100%;
+}/*# sourceMappingURL=header.css.map */

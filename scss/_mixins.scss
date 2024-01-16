@@ -1,0 +1,12 @@
+@mixin heading-styles($font-size, $color) {
+    font-size: $font-size;
+    color:$dtc;
+    font-family: $font-family;
+  }
+  
+  @mixin paragraph-styles($font-size, $color) {
+    font-size: $font-size;
+    color: $dtc;
+    font-family: $font-family;
+
+  }

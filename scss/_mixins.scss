@@ -1,12 +1,16 @@
 @mixin heading-styles($font-size, $color) {
     font-size: $font-size;
-    color:$dtc;
+    color: $color;
+    font-weight: $font-weight;
+    line-height: $line-height;
     font-family: $font-family;
   }
   
   @mixin paragraph-styles($font-size, $color) {
     font-size: $font-size;
-    color: $dtc;
+    color: $color;
+    font-weight: $font-weight;
+    line-height: $line-height;
     font-family: $font-family;
 
   }

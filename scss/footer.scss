@@ -1,0 +1,87 @@
+// styles.scss
+
+@import 'variables';
+@import 'mixins';
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+footer {
+    background-color: $fbc;
+    padding: 40px 0;
+}
+
+.main-footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 1440px;
+    margin: 0 auto;
+    padding-bottom: 20px;
+
+    .footer-logo img {
+        max-width: 192px;
+        max-height: 172px;
+        margin-right: 90px;
+    }
+
+    .footer-blocks {
+        display: flex;
+        align-items: flex-start;
+       
+    }
+
+    .footer-description {
+        max-width: 220px;
+        
+    }
+
+    .footer-description,
+    .footer-sections,
+    .footer-social,
+    .footer-contacts,
+    .footer-disclaimer {
+    
+        text-align: left;
+        flex: 1;
+        padding: 0 20px;
+       
+    }
+
+    h3 {
+        @include heading-styles(14px, $ltc);
+        margin-bottom: 20px;
+    }
+
+    p {
+        @include paragraph-styles(14px, $ltc);
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+            margin-bottom: 5px;
+            a {
+                @include heading-styles(14px, $ltc);
+                text-decoration: none;
+            }
+            p {
+                margin-bottom: -10px;
+                line-height: $line-height;
+                @include heading-styles(14px, $ltc);
+            }
+        }
+    }
+}
+
+.footer-disclaimer {
+    text-align: center;
+    @include paragraph-styles(14px, $ltc);
+
+}

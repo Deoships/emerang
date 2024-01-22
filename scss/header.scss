@@ -27,14 +27,14 @@ body {
     max-height: 100%;
   }
   
-  .main-menu ul {
+  .menu-ul {
     list-style: none;
     display: flex;
   
-    li {
+    .menu-ul-li {
       margin-right: 30px;
 
-      a {
+      .menu-ul-li-a {
         @include heading-styles(16px, $dtc);
         text-decoration: none;
         color: $dtc; 

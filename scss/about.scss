@@ -13,7 +13,7 @@ body {
     padding: 0 25px;
     box-sizing: border-box;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .contact-block {
@@ -23,37 +23,41 @@ body {
     background-color: $bbc;
     box-sizing: border-box;
     text-align: left;
+    margin-right: 30px;
 
 }
 
-h2 {
+.contact-h2 {
     @include heading-styles(14px, $dtc);
     margin-bottom: 15px;
     font-weight: 700;
 }
 
-p {
+contact-ul-li-img-p {
     @include paragraph-styles(14px, $dtc);
 }
 
-ul {
-    list-style: none;
+.contact-ul {
     padding: 0;
-    margin: 0;
+    list-style: none;
 
-    li {
+
+    .contact-ul-li {
         display: flex;
-        align-items: flex-start;
-        margin-bottom: 15px;
+        align-items: center; 
+        height: 37px;
+        margin-bottom: 10px;
+        width: 181px;
+    
+     
 
-        img {
+        .contact-ul-li-img {
             margin-right: 24px;
-            max-width: 24px; 
-            height: auto;
+         
         }
 
-        p {
-            margin-bottom: -10px;
+        .contact-ul-li-img-p {
+          
             line-height: $line-height;
             @include paragraph-styles(14px, $dtc);
         }
@@ -75,7 +79,7 @@ ul {
     padding: 25px;
     background-color: $bbc;
     box-sizing: border-box;
-    text-align: center;
+    text-align: left;
 }
 
 .line-bottom {

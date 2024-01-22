@@ -1,14 +1,11 @@
 @import 'variables';
 @import 'mixins';
 
-body {
-    margin: 0;
-    padding: 0;
-}
 
 footer {
     background-color: $fbc;
     padding: 40px 0;
+
 }
 
 .main-footer {
@@ -49,27 +46,27 @@ footer {
        
     }
 
-    h3 {
+   .footer-h3 {
         @include heading-styles(14px, $ltc);
         margin-bottom: 20px;
     }
 
-    p {
+    .footer-p {
         @include paragraph-styles(14px, $ltc);
     }
 
-    ul {
+    .footer-ul {
         list-style: none;
         padding: 0;
         margin: 0;
 
-        li {
+        .footer-ul-li {
             margin-bottom: 5px;
-            a {
+            .footer-ul-li-a {
                 @include heading-styles(14px, $ltc);
                 text-decoration: none;
             }
-            p {
+            .footer-ul-li-p {
                 margin-bottom: -10px;
                 line-height: $line-height;
                 @include heading-styles(14px, $ltc);

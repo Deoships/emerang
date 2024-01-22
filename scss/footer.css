@@ -1,8 +1,3 @@
-body {
-  margin: 0;
-  padding: 0;
-}
-
 footer {
   background-color: #212121;
   padding: 40px 0;
@@ -38,7 +33,7 @@ footer {
   flex: 1;
   padding: 0 20px;
 }
-.main-footer h3 {
+.main-footer .footer-h3 {
   font-size: 14px;
   color: #ffffff;
   font-weight: 400;
@@ -46,22 +41,22 @@ footer {
   font-family: "Montserrat", Arial, sans-serif;
   margin-bottom: 20px;
 }
-.main-footer p {
+.main-footer .footer-p {
   font-size: 14px;
   color: #ffffff;
   font-weight: 400;
   line-height: 24px;
   font-family: "Montserrat", Arial, sans-serif;
 }
-.main-footer ul {
+.main-footer .footer-ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-.main-footer ul li {
+.main-footer .footer-ul .footer-ul-li {
   margin-bottom: 5px;
 }
-.main-footer ul li a {
+.main-footer .footer-ul .footer-ul-li .footer-ul-li-a {
   font-size: 14px;
   color: #ffffff;
   font-weight: 400;
@@ -69,7 +64,7 @@ footer {
   font-family: "Montserrat", Arial, sans-serif;
   text-decoration: none;
 }
-.main-footer ul li p {
+.main-footer .footer-ul .footer-ul-li .footer-ul-li-p {
   margin-bottom: -10px;
   line-height: 24px;
   font-size: 14px;

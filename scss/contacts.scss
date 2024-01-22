@@ -1,0 +1,90 @@
+@import 'variables';
+@import 'mixins';
+
+body {
+    background-color: #F3F2ED;
+    margin: 0;
+    padding: 0;
+}
+
+.block {
+    width: 1088px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 40px 30px; 
+    margin-bottom: 75px;
+    margin-top: 75px;
+}
+
+.content {
+    text-align: center;
+  
+}
+
+.contact-h1 {
+    @include heading-styles(29px, $dtc);
+    font-weight: 700;
+    text-align: center;
+}
+
+.contact-h2 {
+    @include heading-styles(22px, $dtc);
+    font-weight: 600; 
+}
+
+.contact-desc {
+justify-content: center;
+    margin-bottom: 55px;
+    margin-top: 40px;
+margin-left: 90px;
+    display: flex;
+}
+
+.contact-item {
+        margin-right: 75px;
+}
+
+.contact-p {
+    @include paragraph-styles(18px, $dtc);
+}
+
+.contact-p2 {
+    @include paragraph-styles(14px, $dtc);
+    margin-bottom: 30px;
+}
+
+
+.content-img {
+    background-image: url(../img/drone_more.png);
+    margin: 0 auto;
+    width: 838px;
+    height: 757px;
+}
+
+
+
+.delivery {
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.item {
+    margin-top: 60px;
+    text-align: center;
+    margin-right: 75px;
+}
+
+.item img {
+    max-width:50px;
+    height: 50px;
+}
+
+.contact-info {
+    display: flex;
+}
+
+.contact-text {
+    max-width: 684px;
+}

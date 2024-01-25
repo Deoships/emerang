@@ -1,0 +1,50 @@
+.catalog-h1 {
+  font-size: 29px;
+  color: #212121;
+  font-weight: 400;
+  line-height: 24px;
+  font-family: "Montserrat", Arial, sans-serif;
+  font-weight: 700;
+  text-align: center;
+}
+
+.wrap {
+  margin-top: 75px;
+}
+
+.menu-catalog {
+  display: flex;
+  width: 1000px;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.menu-catalog a {
+  margin-top: 20px;
+  margin-bottom: 70px;
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px;
+  color: #212121;
+  font-weight: 400;
+  line-height: 24px;
+  font-family: "Montserrat", Arial, sans-serif;
+  width: 335px;
+  border-bottom: 1px solid rgba(33, 33, 33, 0.3);
+  transition: border-bottom 0.5s ease-in-out;
+}
+
+.menu-catalog a:hover {
+  opacity: 0.7;
+}
+
+.menu-catalog a.active {
+  border-bottom: 1px solid var(--42DA96, #42DA96);
+  font-size: 14px;
+  color: #212121;
+  font-weight: 400;
+  line-height: 24px;
+  font-family: "Montserrat", Arial, sans-serif;
+  font-weight: 700;
+}/*# sourceMappingURL=catalog.css.map */

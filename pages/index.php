@@ -67,7 +67,6 @@ include '../includes/header.php';
                 <img src="brand4.jpg" alt="Бренд 4">
                 <p>Текст 4</p>
             </div>
-            <!-- Добавьте карточки для других брендов -->
         </div>
     </div>
 </section>

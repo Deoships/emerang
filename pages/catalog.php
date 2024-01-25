@@ -1,11 +1,9 @@
 <?php
-// В файле с функциями (например, functions.php)
 function getCategoryClass($category) {
     $currentCategory = isset($_GET['category']) ? $_GET['category'] : '1';
     return ($category == $currentCategory) ? 'active' : '';
 }
 
-// В файле, где вы используете функцию
 include '../includes/header.php';
 include '../config/db.php'; 
 
@@ -36,7 +34,11 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
         
         <div class="product-cards">
             <?php foreach ($products as $product): ?>
-                <div class="product-card <?= getCategoryClass($product['id_type'] ?? '') ?>">
+                <?php
+                // Получаем цвет товара для передачи в URL-адресе
+                $color = urlencode($product['color_name']);
+                ?>
+                <a href="../pages/product.php?id=<?= $product['id_product'] ?>&color=<?= $color ?>" class="product-card <?= getCategoryClass($product['id_type'] ?? '') ?>">
                     <img src="<?= $product['url'] ?>" alt="<?= $product['name'] ?>">
                     <h3><?= $product['name'] ?></h3>
                     <div class="product-info">
@@ -44,7 +46,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <button class="add-to-cart-btn" onclick="addToCart(<?= $product['id_product'] ?>)">
                         </button>
                     </div>
-                </div>
+                </a>
             <?php endforeach; ?>
         </div>
     </div>

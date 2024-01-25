@@ -1,6 +1,11 @@
 @import 'variables';
 @import 'mixins';
 
+a {
+    text-decoration: none;
+  }
+  
+
 .catalog-h1 {
     @include heading-styles(29px, $dtc);
     font-weight: 700;

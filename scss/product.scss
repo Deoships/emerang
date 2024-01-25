@@ -1,0 +1,81 @@
+@import 'variables';
+@import 'mixins';
+
+.back-btn {
+    @include back-button-styles;
+    width: 134px;
+    height: 40px;
+    margin-bottom: 75px;
+    margin-left: 165px;
+}
+
+.slider-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.main-slider {
+    position: relative;
+    width: 445px;
+    height: 445px;
+    border-radius: 6px;
+    background: $bbc;
+    margin-bottom: 30px;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+}
+
+#main-slider-image {
+    max-width: 100%; 
+    max-height: 100%; 
+}
+
+.thumbnails-and-arrows {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.slider-nav {
+    cursor: pointer;
+    font-size: 24px;
+    color: #333;
+    padding: 5px 10px;
+}
+
+.thumbnail-images {
+    display: flex;
+
+    margin: 0 10px;
+}
+
+.thumbnail-slide {
+    width: 65px;
+    height: 65px;
+    background-color: $bbc;
+    margin-right: 10px;
+    border-radius: 6px;
+}
+
+.thumbnail-slide:last-child {
+    margin-right: 0;
+}
+
+.thumbnail-slide img {
+    margin-top: 7px;
+    margin-left: 20px;
+    width: 30px;
+    height: 50px;
+}
+
+.color-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: none;
+    margin-right: 5px; 
+    cursor: pointer;
+}

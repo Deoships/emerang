@@ -40,3 +40,68 @@ margin: 0 auto;
     @include paragraph-styles(14px, $dtc);
     font-weight: 700;
 }
+
+.product-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:center;
+    margin: 40px;
+
+}
+
+.product-card {
+    width: 245px;
+    box-sizing: border-box;
+    padding: 10px 10px;
+    margin-left: 40px;
+    border-radius: 6px;
+    background-color: $bbc;
+    transition: transform 0.3s ease-in-out; /* Add transition effect for hover */
+
+    &:hover {
+        border-radius: 6px;
+        background: var(--FFF, #FFF);
+        box-shadow: 0px 4px 20px 0px rgba(196, 196, 196, 0.50);
+        cursor: pointer;
+    }
+    
+}
+
+.product-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 10px;
+    .price {
+    @include paragraph-styles(18px, $dtc);
+
+   
+    }
+    .add-to-cart-btn {
+        background-color: rgba(255, 255, 255, 0); 
+        border: none; 
+    }
+
+    .add-to-cart-btn {
+        background: url('../img/cart.png') no-repeat; // Исходное изображение
+        width: 24px;
+        height: 24px;
+        cursor: pointer;
+    
+        &:hover {
+            background: url('../img/cart_ful.png') no-repeat; // Изображение при наведении
+        }
+    }
+  }
+
+.product-card img {
+    height: 236px;
+    margin-left: 40px;
+}
+
+.product-card h3 {
+    @include paragraph-styles(14px, $dtc);
+    font-weight: 600;
+    width: 224px;
+    text-align: center;
+}

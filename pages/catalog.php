@@ -26,29 +26,31 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <section>
     <div class="wrap">
-    <h1 class="catalog-h1">Каталог</h1>
-    
-    <div class="menu-catalog">
-        <a href="?category=1" class="<?= getCategoryClass(1) ?>">Смартфоны</a>
-        <a href="?category=2" class="<?= getCategoryClass(2) ?>">Смарт-часы</a>
-        <a href="?category=3" class="<?= getCategoryClass(3) ?>">Планшеты</a>
+        <h1 class="catalog-h1">Каталог</h1>
+        
+        <div class="menu-catalog">
+            <a href="?category=1" class="<?= getCategoryClass(1) ?>">Смартфоны</a>
+            <a href="?category=2" class="<?= getCategoryClass(2) ?>">Смарт-часы</a>
+            <a href="?category=3" class="<?= getCategoryClass(3) ?>">Планшеты</a>
+        </div>
+        
+        <div class="product-cards">
+            <?php foreach ($products as $product): ?>
+                <div class="product-card <?= getCategoryClass($product['id_type'] ?? '') ?>">
+                    <img src="<?= $product['url'] ?>" alt="<?= $product['name'] ?>">
+                    <h3><?= $product['name'] ?></h3>
+                    <div class="product-info">
+                        <p class="price"><?= $product['price'] ?> р.</p>
+                        <button class="add-to-cart-btn" onclick="addToCart(<?= $product['id_product'] ?>)">
+                        </button>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
     </div>
-    
-    <div class="products">
-        <?php foreach ($products as $product): ?>
-            <div class="product <?= getCategoryClass($product['id_type'] ?? '') ?>">
-            <img src="<?= $product['url'] ?>" alt="<?= $product['name'] ?>">    
-            <h3><?= $product['name'] ?></h3>
-                <p><?= $product['price'] ?> р.</p>
-                <button onclick="addToCart(<?= $product['id_product'] ?>)">Добавить в корзину</button>
-            </div>
-        <?php endforeach; ?>
-    </div>
-</div>
 
-<script src="../js/menu.js"></script>
+    <script src="../js/menu.js"></script>
 </section>
-
 
 <?php
 include '../includes/footer.php';

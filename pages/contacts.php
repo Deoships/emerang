@@ -39,7 +39,6 @@ include '../includes/header.php';
             </div>
         </div>
     </div>
-
     <div class="block">
         <div class="contact-info">
         <img src="../img/present.png" alt="present">
@@ -64,5 +63,3 @@ include '../includes/header.php';
 <?php
 include '../includes/footer.php';
 ?>
-</body>
-</html>

@@ -14,3 +14,21 @@
     font-family: $font-family;
 
   }
+
+  @mixin button-styles {
+    height: 40px;
+    padding: 10px 69px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    color: $bbc;
+    border-style: none;
+    background: var(--0B8063, #0B8063);
+    font-family: $font-family;
+    font-size: 14px;
+
+    &:hover {
+      background: var(--42DA96, #42DA96);
+    }
+  }
+

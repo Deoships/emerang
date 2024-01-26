@@ -1,4 +1,3 @@
-<!-- Верхняя часть страницы, до начала PHP кода -->
 <?php
 include '../includes/header.php';
 include '../config/db.php';
@@ -24,6 +23,12 @@ if ($product_id) {
         $stmt_images->bindParam(':product_id', $product_id, PDO::PARAM_INT);
         $stmt_images->execute();
         $images = $stmt_images->fetchAll(PDO::FETCH_ASSOC);
+
+        // Запрос характеристик
+        $stmt_characteristics = $pdo->prepare("SELECT name, value FROM characteristic WHERE id_product = :product_id");
+        $stmt_characteristics->bindParam(':product_id', $product_id, PDO::PARAM_INT);
+        $stmt_characteristics->execute();
+        $characteristics = $stmt_characteristics->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <section>
@@ -47,9 +52,10 @@ if ($product_id) {
                 </div>
             </div>
             <div class="product-info">
-                <h2><?= $product['name'] ?></h2>
-                <p class="price"><?= $product['price'] ?> р.</p>
-                <p class="type">Тип: <?= $product['type_name'] ?></p>
+                <div class="product-char">
+                <h2 class="product-char-h2"><?= $product['name'] ?></h2>
+                <h1 class="price-h1"><?= $product['price'] ?> р.</h1>
+                <p class="color-unlock">Доступные цвета:</p>
                 <div class="colors">
                     <?php
                     $stmt_colors = $pdo->prepare("SELECT DISTINCT c.name FROM color c JOIN img i ON c.id_color = i.id_color WHERE i.id_product = :product_id");
@@ -61,14 +67,42 @@ if ($product_id) {
                         <button class="color-btn" style="background-color: <?= $color['name'] ?>" onclick="changeMainImageByColor('<?= $color['name'] ?>')"></button>
                     <?php endforeach; ?>
                 </div>
-                <button class="buy-btn" onclick="addToCart(<?= $product['id_product'] ?>)">
-                    Приобрести
-                </button>
+                <div class="characteristics">
+                    <h3 class="characteristics-h3">Характеристики:</h3>
+                    <ul class="characteristics-ul">
+                        <?php foreach ($characteristics as $char): ?>
+                            <li><?= $char['name'] ?>: <?= $char['value'] ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+                <button class="buy-btn" onclick="addToCart(<?= $product['id_product'] ?>, '<?= $product['name'] ?>', <?= $product['price'] ?>)">
+    Приобрести
+</button>
+            </div>
             </div>
         </div>
     </div>
     <script src="../js/slider.js"></script>
 </section>
+
+<script>
+function loadCartContent() {
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                document.getElementById('cart-content').innerHTML = xhr.responseText;
+            } else {
+                console.error('Произошла ошибка при загрузке содержимого корзины');
+            }
+        }
+    };
+    xhr.open('GET', '../includes/popup.php', true); // Обновленный путь к файлу popup.php
+    xhr.send();
+}
+
+</script>
+
 
 
 <?php

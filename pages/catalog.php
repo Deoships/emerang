@@ -43,15 +43,16 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <h3><?= $product['name'] ?></h3>
                     <div class="product-info">
                         <p class="price"><?= $product['price'] ?> р.</p>
-                        <button class="add-to-cart-btn" onclick="addToCart(<?= $product['id_product'] ?>)">
-                        </button>
+                        <button class="add-to-cart-btn" data-product-id="<?= $product['id_product'] ?>"></button>
+
                     </div>
                 </a>
             <?php endforeach; ?>
         </div>
     </div>
 
-    <script src="../js/menu.js"></script>
+<script src="../js/menu.js"></script>
+
 </section>
 
 <?php

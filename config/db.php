@@ -1,8 +1,9 @@
 <?php
 $host = "localhost";
-$dbname = "emerang";
+$dbname = "emerang1";
 $user = "root";
-$password = "";
+$password = "123";
+
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $user, $password);

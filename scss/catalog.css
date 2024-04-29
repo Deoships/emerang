@@ -13,7 +13,7 @@ a {
 }
 
 .wrap {
-  margin-top: 75px;
+  padding: 70px 170px;
 }
 
 .menu-catalog {
@@ -56,7 +56,7 @@ a {
 .product-cards {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   margin: 40px;
 }
 

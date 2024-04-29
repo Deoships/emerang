@@ -7,9 +7,16 @@ function getCategoryClass($category) {
 include '../includes/header.php';
 include '../config/db.php'; 
 
+$pdo->exec("set names utf8");
+$pdo->exec("set character_set_client='utf8'");
+$pdo->exec("set character_set_results='utf8'");
+$pdo->exec("set collation_connection='utf8_general_ci'");
+
+// Остальной код остается без изменений
+
 $category = isset($_GET['category']) ? $_GET['category'] : '1';
 
-$stmt = $pdo->prepare("SELECT p.id_product, p.name, p.price, t.name as type_name, c.name as color_name, i.url
+$stmt = $pdo->prepare("SELECT p.id_product, p.name, p.price, t.name as type_name, c.name as color_name, MIN(i.url) as url
 FROM product p
 JOIN type t ON p.id_type = t.id_type
 JOIN img i ON p.id_product = i.id_product
@@ -20,6 +27,7 @@ GROUP BY p.id_product, c.id_color
 $stmt->bindParam(':selected_category', $category, PDO::PARAM_INT);
 $stmt->execute();
 $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 
 <section>

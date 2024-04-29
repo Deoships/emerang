@@ -15,10 +15,11 @@
 .block-2 {
     width: 1250px;
     margin: 0 auto;
+    margin-bottom: 70px;
 }
 
 .left-content, .right-content {
-    width: 50%;
+    width: 70%;
 }
 
 .content-png {
@@ -27,18 +28,27 @@
     height: 534px;
 }
 
+.content-png-1 {
+    background-image: url(../img/banner2.png);
+    width: 643.21px;
+    height: 415px;
+}
+
 .index-h1 {
     @include heading-styles(29px, $dtc);
     font-weight: 700;
+    width: 400px;
 }
 
 .index-h2 {
     @include heading-styles(23px, $dtc);
     font-weight: 600;
+    width: 400px;
 }
 
 .index-p {
     @include heading-styles(14px, $dtc);
+
 }
 
 .button {
@@ -53,27 +63,93 @@
 
 .brand-cards {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
 }
 
 .brand-card {
     height: 150px;
     margin-top: 30px;
+    margin-bottom: 70px;
     margin-right: 30px;
     background-color: #fff;
     padding: 20px 35px;
     text-align: center;
 
-     &:hover {
+     
+}
+
+.brand-card:hover {
         border-radius: 6px;
         background: var(--FFF, #FFF);
         box-shadow: 0px 4px 20px 0px rgba(196, 196, 196, 0.50);
         cursor: pointer;
     }
-}
 
 .brand-card img {
     margin-top: 20px;
   margin-bottom: 10px;
+}
+
+.block-2 > .product-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin: 0;
+}
+
+.block-2 > .product-cards >.product-card {
+    width: 270px;
+    box-sizing: border-box;
+    padding: 10px 10px;
+    border-radius: 6px;
+    background-color: $bbc;
+    transition: transform 0.3s ease-in-out; /* Add transition effect for hover */
+
+    &:hover {
+        border-radius: 6px;
+        background: var(--FFF, #FFF);
+        box-shadow: 0px 4px 20px 0px rgba(196, 196, 196, 0.50);
+        cursor: pointer;
+    }
+    
+}
+
+.block-2 > .product-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 10px;
+    .price {
+    @include paragraph-styles(18px, $dtc);
+
+   
+    }
+    .add-to-cart-btn {
+        background-color: rgba(255, 255, 255, 0); 
+        border: none; 
+    }
+
+    .add-to-cart-btn {
+        background: url('../img/cart.png') no-repeat; // Исходное изображение
+        width: 24px;
+        height: 24px;
+        cursor: pointer;
+    
+        &:hover {
+            background: url('../img/cart_ful.png') no-repeat; // Изображение при наведении
+        }
+    }
+  }
+
+.block-2 > .product-cards >.product-card img {
+    height: 236px;
+    margin-left: 20%;
+}
+
+.block-2 >.product-card h3 {
+    @include paragraph-styles(14px, $dtc);
+    font-weight: 600;
+    width: 224px;
+    text-align: center;
 }

@@ -2,34 +2,85 @@
 include '../includes/header.php';
 include '../config/db.php';
 
+// Начало сессии
+session_start();
+
+// Получение идентификатора товара из запроса
 $product_id = isset($_GET['id']) ? $_GET['id'] : null;
+
+// Получение цвета товара из запроса
 $product_color = isset($_GET['color']) ? $_GET['color'] : null;
 
+// Проверка наличия идентификатора товара
 if ($product_id) {
-    $stmt = $pdo->prepare("SELECT p.id_product, p.name, p.price, t.name as type_name, c.name as color_name, i.url
-        FROM product p
-        JOIN type t ON p.id_type = t.id_type
-        JOIN img i ON p.id_product = i.id_product
-        JOIN color c ON i.id_color = c.id_color
-        WHERE p.id_product = :product_id
-        GROUP BY p.id_product, c.id_color
-    ");
+    // Запрос информации о товаре из базы данных
+    $stmt = $pdo->prepare("SELECT p.id_product, p.name, p.price, p.description, t.name as type_name, c.name as color_name, i.url
+    FROM product p
+    JOIN type t ON p.id_type = t.id_type
+    JOIN img i ON p.id_product = i.id_product
+    JOIN color c ON i.id_color = c.id_color
+    WHERE p.id_product = :product_id");    
     $stmt->bindParam(':product_id', $product_id, PDO::PARAM_INT);
     $stmt->execute();
     $product = $stmt->fetch(PDO::FETCH_ASSOC);
 
+    // Проверка наличия информации о товаре
     if ($product) {
+        // Получение изображений товара
         $stmt_images = $pdo->prepare("SELECT i.url, c.name as color FROM img i JOIN color c ON i.id_color = c.id_color WHERE i.id_product = :product_id");
         $stmt_images->bindParam(':product_id', $product_id, PDO::PARAM_INT);
         $stmt_images->execute();
         $images = $stmt_images->fetchAll(PDO::FETCH_ASSOC);
 
-        // Запрос характеристик
+        // Запрос характеристик товара
         $stmt_characteristics = $pdo->prepare("SELECT name, value FROM characteristic WHERE id_product = :product_id");
         $stmt_characteristics->bindParam(':product_id', $product_id, PDO::PARAM_INT);
         $stmt_characteristics->execute();
         $characteristics = $stmt_characteristics->fetchAll(PDO::FETCH_ASSOC);
-?>
+
+        // Запрос похожих товаров
+        $stmt = $pdo->prepare("SELECT p.id_product, p.name, p.price, t.name as type_name, c.name as color_name, MIN(i.url) as url
+        FROM product p
+        JOIN type t ON p.id_type = t.id_type
+        JOIN img i ON p.id_product = i.id_product
+        JOIN color c ON i.id_color = c.id_color
+        WHERE p.id_product != :product_id
+        GROUP BY p.id_product, c.id_color
+        LIMIT 4");
+        $stmt->bindParam(':product_id', $product_id, PDO::PARAM_INT);
+        $stmt->execute();
+        $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        if (!isset($_SESSION['previously_viewed_products'])) {
+            $_SESSION['previously_viewed_products'] = array();
+        }
+        
+        // Добавляем товар и его цвет в начало списка просмотренных
+        array_unshift($_SESSION['previously_viewed_products'], array('id' => $product_id, 'color' => $product_color));
+        
+        // Обрезаем список просмотренных товаров до 4 элементов
+        $_SESSION['previously_viewed_products'] = array_slice($_SESSION['previously_viewed_products'], 0, 4);
+        
+        $stmt_category = $pdo->prepare("SELECT id_type FROM product WHERE id_product = :product_id");
+$stmt_category->bindParam(':product_id', $product_id, PDO::PARAM_INT);
+$stmt_category->execute();
+$category = $stmt_category->fetch(PDO::FETCH_ASSOC)['id_type'];
+
+// Запрос похожих товаров той же категории, исключая выбранный товар
+$stmt_similar_products = $pdo->prepare("SELECT p.id_product, p.name, p.price, t.name as type_name, c.name as color_name, MIN(i.url) as url
+FROM product p
+JOIN type t ON p.id_type = t.id_type
+JOIN img i ON p.id_product = i.id_product
+JOIN color c ON i.id_color = c.id_color
+WHERE p.id_type = :category AND p.id_product != :product_id
+GROUP BY p.id_product, c.id_color
+LIMIT 4");
+$stmt_similar_products->bindParam(':category', $category, PDO::PARAM_INT);
+$stmt_similar_products->bindParam(':product_id', $product_id, PDO::PARAM_INT);
+$stmt_similar_products->execute();
+$similar_products = $stmt_similar_products->fetchAll(PDO::FETCH_ASSOC);
+
+        ?>
 
 <section>
     <div class="wrap">
@@ -83,34 +134,106 @@ if ($product_id) {
         </div>
     </div>
     <script src="../js/slider.js"></script>
+
+    <div class="block-2">
+        <div class="block-2-desc">
+    <h2 class="index-h2">Описание</h2>
+    <p class="index-p"><?= nl2br($product['description']) ?></p></div>
+</div>
+
+
+    <?php
+// Запрос категории выбранного товара
+$stmt_category = $pdo->prepare("SELECT id_type FROM product WHERE id_product = :product_id");
+$stmt_category->bindParam(':product_id', $product_id, PDO::PARAM_INT);
+$stmt_category->execute();
+$category = $stmt_category->fetch(PDO::FETCH_ASSOC)['id_type'];
+
+// Запрос похожих товаров той же категории, исключая выбранный товар
+$stmt_similar_products = $pdo->prepare("SELECT p.id_product, p.name, p.price, t.name as type_name, c.name as color_name, MIN(i.url) as url
+FROM product p
+JOIN type t ON p.id_type = t.id_type
+JOIN img i ON p.id_product = i.id_product
+JOIN color c ON i.id_color = c.id_color
+WHERE p.id_type = :category AND p.id_product = :product_id
+GROUP BY p.id_product, c.id_color
+LIMIT 4");
+$stmt_similar_products->bindParam(':category', $category, PDO::PARAM_INT);
+$stmt_similar_products->bindParam(':product_id', $product_id, PDO::PARAM_INT);
+$stmt_similar_products->execute();
+$similar_products = $stmt_similar_products->fetchAll(PDO::FETCH_ASSOC);
+?>
+
+<div class="block-2">
+    <h2 class="index-h2">Похожие товары</h2>
+    <div class="product-cards">
+        <?php foreach ($similar_products as $similar_product): ?>
+            <a href="../pages/product.php?id=<?= $similar_product['id_product'] ?>&color=<?= urlencode($similar_product['color_name']) ?>" class="product-card">
+                <img src="<?= $similar_product['url'] ?>" alt="<?= $similar_product['name'] ?>">
+                <h3><?= $similar_product['name'] ?></h3>
+                <div class="product-info">
+                    <p class="price"><?= $similar_product['price'] ?> р.</p>
+                    <button class="add-to-cart-btn" data-product-id="<?= $similar_product['id_product'] ?>"></button>
+                </div>
+            </a>
+        <?php endforeach; ?>
+    </div>
+</div>
+
+    <?php
+// Проверяем, есть ли просмотренные товары в сессии
+if (!empty($_SESSION['previously_viewed_products'])) {
+?>
+<div class="block-2">
+    <h2 class="index-h2">Вы смотрели ранее</h2>
+    <div class="product-cards">
+        <?php
+        // Выводим карточки просмотренных товаров того же цвета, на который нажали
+        foreach ($_SESSION['previously_viewed_products'] as $previously_viewed_product):
+            $previously_viewed_product_id = $previously_viewed_product['id'];
+            $previously_viewed_product_color = $previously_viewed_product['color'];
+
+            $stmt_product = $pdo->prepare("SELECT p.id_product, p.name, p.price, t.name as type_name, c.name as color_name, i.url
+                FROM product p
+                JOIN type t ON p.id_type = t.id_type
+                JOIN img i ON p.id_product = i.id_product
+                JOIN color c ON i.id_color = c.id_color
+                WHERE p.id_product = :product_id AND c.name = :color");
+            $stmt_product->bindParam(':product_id', $previously_viewed_product_id, PDO::PARAM_INT);
+            $stmt_product->bindParam(':color', $previously_viewed_product_color, PDO::PARAM_STR);
+            $stmt_product->execute();
+            $previously_viewed_product_info = $stmt_product->fetch(PDO::FETCH_ASSOC);
+
+            if ($previously_viewed_product_info): ?>
+                <a href="../pages/product.php?id=<?= $previously_viewed_product_info['id_product'] ?>&color=<?= urlencode($previously_viewed_product_info['color_name']) ?>" class="product-card">
+                    <img src="<?= $previously_viewed_product_info['url'] ?>" alt="<?= $previously_viewed_product_info['name'] ?>">
+                    <h3><?= $previously_viewed_product_info['name'] ?></h3>
+                    <div class="product-info">
+                        <p class="price"><?= $previously_viewed_product_info['price'] ?> р.</p>
+                        <button class="add-to-cart-btn" data-product-id="<?= $previously_viewed_product_info['id_product'] ?>"></button>
+                    </div>
+                </a>
+            <?php endif; ?>
+        <?php endforeach; ?>
+    </div>
+</div>
+<?php
+}
+?>
 </section>
 
 <script>
-function loadCartContent() {
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-                document.getElementById('cart-content').innerHTML = xhr.responseText;
-            } else {
-                console.error('Произошла ошибка при загрузке содержимого корзины');
-            }
-        }
-    };
-    xhr.open('GET', '../includes/popup.php', true); // Обновленный путь к файлу popup.php
-    xhr.send();
-}
-
+    function goBack() {
+        window.history.back();
+    }
 </script>
-
-
 
 <?php
     } else {
-        echo "Товар не найден.";
+        echo "Товар не найден";
     }
 } else {
-    echo "Не указан id товара.";
+    echo "Не указан id товара";
 }
 
 include '../includes/footer.php';

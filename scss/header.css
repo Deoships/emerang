@@ -56,4 +56,8 @@ body {
 .cart-icon img {
   max-height: 100%;
   cursor: pointer;
+}
+
+.cart-icon img:hover {
+  background-image: url(../img/cart_ful.png) no-repet;
 }/*# sourceMappingURL=header.css.map */

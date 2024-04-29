@@ -8,6 +8,7 @@ body {
   }
   
   .container {
+    padding: 0;
     width: 1440px;
     margin: 0 auto;
     display: flex;
@@ -16,19 +17,27 @@ body {
   }
   
   .main-header {
+
     background-color: $bc; 
-    height: 100px;
+    padding: 30px 35px;
     display: flex;
     align-items: center;
     border-bottom: 1px solid rgba(0, 0, 0, 0.50);
   }
   
-  .logo img {
-    max-height: 100%;
+  .logo {
+ display: flex;
+ flex-wrap: nowrap;
+ align-items: center;
+
+  }
+
+  .logo-icon {
+    margin-right: 10px;
   }
   
   .menu-ul {
-    list-style: none;
+list-style-type: none;
     display: flex;
   
     .menu-ul-li {
@@ -62,3 +71,66 @@ body {
   .cart-icon img:hover {
     background-image: url(../img/cart_ful.png) no-repet;
   }
+
+  @media (min-width: 360px) and (max-width: 480px) {
+
+.logo-icon {
+  margin-left: 10px;
+}
+
+.logo-name {
+  display: none;
+  
+}
+
+.menu-ul {      
+  padding: 0;
+  .menu-ul-li {
+    margin-left: 0;
+    margin-right: 10px;
+
+    .menu-ul-li-a {
+      @include heading-styles(14px, $dtc);
+      text-decoration: none;
+      color: $dtc; 
+      
+     &:hover {
+      @include heading-styles(14px, $aec);
+  }
+    }
+}
+}
+.cart-icon {
+  margin-left: 10px;
+
+}
+  }
+
+  @media (min-width: 481px) and (max-width: 768px) {
+
+    .logo-name {
+      display: none;
+    }
+
+    .menu-ul {      
+      padding: 0;
+      .menu-ul-li {
+        margin-left: 30px;
+        margin-right: 10px;
+    
+        .menu-ul-li-a {
+          @include heading-styles(16px, $dtc);
+          text-decoration: none;
+          color: $dtc; 
+          
+         &:hover {
+          @include heading-styles(16px, $aec);
+      }
+        }
+    }
+    }
+    .cart-icon {
+      margin-left: 30px;
+    
+    }
+      }

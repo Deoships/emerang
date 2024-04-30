@@ -96,3 +96,46 @@ contact-ul-li-img-p {
     background-color: lightgray; 
     margin: 0 auto;
 }
+
+// АДАПТИВ
+
+@media (max-width: 430px) {
+   
+
+}
+
+@media (max-width: 1200px) {
+    .about-container {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
+
+    .contact-block {
+        margin-bottom: 30px;
+        width: 50%;
+    }
+
+    .line {
+        width: 100%; 
+    }
+ 
+    .contact-ul {
+       
+        .contact-ul-li {
+            width: 100%;
+        }
+    }
+
+    .location-block {
+        width: 100%;
+    }
+
+    .line-bottom {
+        width: 100%;
+    }
+
+    .map {
+        width:100%;
+    }
+
+}

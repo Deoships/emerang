@@ -1,6 +1,7 @@
+@charset "UTF-8";
 .block {
   margin-top: 75px;
-  width: 1110px;
+  max-width: 100%;
   background-color: #F4F4F4;
   padding: 0 70px;
   display: flex;
@@ -20,8 +21,11 @@
 
 .content-png {
   background-image: url(../img/banner.png);
-  width: 573px;
-  height: 534px;
+  width: 100%;
+  max-height: 257px; /* Максимальная высота картинки */
+  height: 0; /* Автоматический размер по высоте */
+  background-size: contain; /* Подгонять размер, чтобы изображение полностью помещалось */
+  background-position: center center;
 }
 
 .content-png-1 {

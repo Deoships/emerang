@@ -19,7 +19,7 @@ include '../includes/header.php';
             <h2 class="contact-h2">Наше расположение</h2>
             <div class="line-bottom"></div>
             <div class="map">
-            <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A677f078ec2b5de1770114f6c625d76767741174a4e61762433371cbb60c36605&amp;width=770&amp;height=450&amp;lang=ru_RU&amp;scroll=true"></script>
+            <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A677f078ec2b5de1770114f6c625d76767741174a4e61762433371cbb60c36605&amp;width=100%&amp;height=450&amp;lang=ru_RU&amp;scroll=true"></script>
             </div>
         </div>
     </div>

@@ -4,7 +4,7 @@ include '../includes/header.php';
 ?>
 
 <section>
-    <div class="block">
+    <div class="block-1">
         <div class="content">
             <h1 class="contact-h1">Более 10 лет на рынке</h1>
         <div class="contact-desc">
@@ -22,7 +22,7 @@ include '../includes/header.php';
         </div>
     </div>
 
-    <div class="block">
+    <div class="block-1">
         <h1 class="contact-h1">Быстро доставим любой Ваш заказ в любую точку Беларуси</h1>
         <div class="delivery">
             <div class="item">
@@ -39,9 +39,9 @@ include '../includes/header.php';
             </div>
         </div>
     </div>
-    <div class="block">
+    <div class="block-1">
         <div class="contact-info">
-        <img src="../img/present.png" alt="present">
+        <img class="content-picture" src="../img/present.png" alt="present">
         <div class="contact-text">
         <h2 class="contact-h2">Наша история</h2>
         <p class="contact-p2">В момент своего зарождения как стартап в эпоху технологической революции, наша компания выросла из маленького магазина в мирового лидера электронной индустрии. Символ передовых технологий, мы не только предоставляем инновационные продукты, но и вдохновляем мировое сообщество к поиску будущего через надежность, качество и преданность технологическому совершенству.</p>
@@ -49,9 +49,9 @@ include '../includes/header.php';
         </div> 
     </div>
 </div>
-<div class="block">
+<div class="block-1">
         <div class="contact-info">
-        <img src="../img/delivery.png" alt="delivery">
+        <img class="content-picture" src="../img/delivery.png" alt="delivery">
         <div class="contact-text">
         <h2 class="contact-h2">Кратко о сотрудниках</h2>
         <p class="contact-p2">В нашей компании работают истинные технологические гении, каждый из которых является сверхчеловеком в своей области. Наши специалисты по продажам обладают уникальным интеллектом и невероятной интуицией в предсказании потребностей клиентов. Они могут с легкостью анализировать самые сложные технические характеристики и предлагать идеальные решения для каждого клиента.</p>

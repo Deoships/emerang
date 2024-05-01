@@ -1,10 +1,11 @@
 <?php
-include '../includes/header.php';
-include '../config/db.php';
-
-// Начало сессии
+// Начинаем сессию
 session_start();
 
+// Включаем файлы header.php и footer.php
+
+include '../includes/header.php';
+include '../config/db.php';
 // Получение идентификатора товара из запроса
 $product_id = isset($_GET['id']) ? $_GET['id'] : null;
 

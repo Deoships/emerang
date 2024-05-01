@@ -57,7 +57,7 @@ margin: 0 auto;
 .product-card {
     width: 245px;
     box-sizing: border-box;
-    padding: 10px 10px;
+    padding: 10px;
     margin-left: 40px;
     border-radius: 6px;
     background-color: $bbc;
@@ -109,4 +109,17 @@ margin: 0 auto;
     font-weight: 600;
     width: 224px;
     text-align: center;
+}
+
+@media (max-width: 1208px) {
+    .menu-catalog {
+        width: 105%;
+    }
+    .wrap {
+        padding: 70px;
+    }
+
+    .product-card {
+        margin-bottom: 40px;
+    }
 }

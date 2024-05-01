@@ -18,8 +18,7 @@
   @mixin button-styles {
     height: 40px;
     padding: 10px 69px;
-    justify-content: center;
-    align-items: center;
+   text-align: center;
     border-radius: 6px;
     color: $bbc;
     border-style: none;

@@ -3,13 +3,13 @@
 
 
 .block {
-    margin-top: 75px;
-    max-width: 100%;
+    width: 55%;
     background-color: #F4F4F4;
+    margin: 70px auto;
     padding: 0 70px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .block-2 {
@@ -24,11 +24,8 @@
 
 .content-png {
     background-image: url(../img/banner.png);
-    width: 100%;
-    max-height: 257px; /* Максимальная высота картинки */
-    height: 0; /* Автоматический размер по высоте */
-    background-size: contain; /* Подгонять размер, чтобы изображение полностью помещалось */
-    background-position: center center;
+    width: 573px;
+    height: 534px;
 }
 
 .content-png-1 {
@@ -157,6 +154,47 @@
     text-align: center;
 }
 
-@media (min-width: 481px) and (max-width: 768px) {
-   
+@media (max-width: 1208px) {
+    .block {
+        flex-wrap: wrap;
+    } 
+
+    .left-content, .left-content-1 {
+        text-align: center;
+    }
+
+    .button {
+        padding: 0;
+    justify-content: center;
+    margin-top: 5%;
+    }
+
+    .left-content,.right-content {
+        width: auto;
+    }
+
+    .content-png {
+        margin-top: 5%;
+        height: 400px;
+        background-repeat:no-repeat;
+        background-size:contain;
+        background-position:center;
+    }
+
+    .content-png-1 {
+        margin-top: 5%;
+        height: 300px;
+        background-repeat:no-repeat;
+        background-size:contain;
+        background-position:center;
+    }
+
+}
+
+@media (max-width: 608px) {
+    .block {
+        flex-wrap: wrap;
+    } 
+
+
 }

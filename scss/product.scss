@@ -175,3 +175,60 @@ background: var(--FFF, #FFF);
     padding: 20px 30px;
     width: 1000px;
 }
+
+.product-card h3 {
+    width: 100%;
+}
+
+// АДАПТИВ
+
+@media (max-width: 1258px) {
+
+    .block-2 > .product-cards {
+        align-items: center;
+        justify-content: center;
+    }
+
+    .back-btn {
+        margin-left: 0;
+    }
+
+    .main-slider  {
+    width: 80%;
+}
+
+    .block-2 {
+        width: 100%;
+    }
+
+    .block-2-desc {
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    .index-h2 {
+        text-align: center;
+    }
+
+
+}
+
+@media (max-width: 908px) {
+
+    .block-2 > .product-cards {
+        margin-top: 20px;
+    }
+
+    .index-h2 {
+ margin: 0 auto;
+    }
+
+    .product-details {
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center
+    }
+
+    
+}
+

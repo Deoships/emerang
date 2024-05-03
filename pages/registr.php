@@ -30,7 +30,7 @@ include '../includes/header.php';
                 <span onclick="showPassword('confirm_password')" class="eye-icon"> </span> <!-- Глазик для показа пароля -->
             </div>
             <div class="btn-container">
-                <button class="button-reg" type="submit">Авторизоваться</button>
+                <button class="button-reg" onclick="redirectToLoginPage()" type="submit">Авторизоваться</button>
                 <button class="button" type="submit">Зарегестрироваться</button>
             </div>
         </form>
@@ -49,6 +49,10 @@ include '../includes/header.php';
         } else {
             passwordField.type = "password";
         }
+    }
+
+    function redirectToLoginPage() {
+        window.location.href = "../pages/login.php"; 
     }
 </script>
 

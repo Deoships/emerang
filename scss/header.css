@@ -58,15 +58,7 @@ body {
   margin-left: auto;
   margin-right: 0;
   margin-left: 50px;
-}
-
-.cart-icon img {
-  max-height: 100%;
   cursor: pointer;
-}
-
-.cart-icon img:hover {
-  background-image: url(../img/cart_ful.png) no-repet;
 }
 
 @media (min-width: 360px) and (max-width: 480px) {
@@ -131,6 +123,6 @@ body {
     font-family: "Montserrat", Arial, sans-serif;
   }
   .cart-icon {
-    margin-left: 30px;
+    margin-left: 20px;
   }
 }/*# sourceMappingURL=header.css.map */

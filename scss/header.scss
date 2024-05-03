@@ -59,18 +59,9 @@ list-style-type: none;
     margin-left: auto;
     margin-right: 0;
     margin-left: 50px;
-  
+      cursor: pointer;
   }
 
-  .cart-icon img {
-    max-height: 100%;
-    cursor: pointer;
-
-  }
-
-  .cart-icon img:hover {
-    background-image: url(../img/cart_ful.png) no-repet;
-  }
 
   @media (min-width: 360px) and (max-width: 480px) {
 
@@ -130,7 +121,7 @@ list-style-type: none;
     }
     }
     .cart-icon {
-      margin-left: 30px;
+      margin-left: 20px;
     
     }
       }

@@ -1,6 +1,7 @@
 .back-btn {
   height: 40px;
   border-radius: 6px;
+  background-color: transparent;
   font-family: "Montserrat", Arial, sans-serif;
   font-size: 14px;
   color: #0B8063;

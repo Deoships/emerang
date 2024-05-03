@@ -1,18 +1,18 @@
 @import 'variables';
 @import 'mixins';
 
-.auth {
+.reg {
     font-family: $font-family;
-    padding: 150px 0px;
+    padding: 100px 0px;
     background-color: $bc;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.auth-container {
+.reg-container {
     width: 466px;
-    height: 290px;
+    height: 502px;
     background-color: #fff;
     border-radius: 6px;
     padding: 40px 30px;
@@ -46,10 +46,40 @@
 }
 
 
-.button-log{
+.button-reg{
     @include back-button-styles;
-    padding: 10px 40px;
+    padding: 10px 60px;
     
+}
+
+.button {
+    padding: 0;
+}
+
+.password-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.eye-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.password-field {
+    padding-right: 30px; /* Увеличиваем правый внутренний отступ для размещения иконки */
+}
+
+.password-field[type="password"] + .eye-icon::after {
+    content: '🔒'; /* Устанавливаем значок для скрытого пароля */
+}
+
+.password-field[type="text"] + .eye-icon::after {
+    content: '🗝️'; /* Устанавливаем значок для показанного пароля */
 }
 
 // АДАПТИВ

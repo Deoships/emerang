@@ -1,5 +1,30 @@
 <?php
 include '../includes/header.php';
+include '../config/db.php';
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if(isset($_POST['login'], $_POST['password'])) {
+        $login = $_POST['login'];
+        $password = $_POST['password'];
+
+        // Проверка логина и пароля в базе данных
+        $stmt = $pdo->prepare("SELECT * FROM user WHERE login = ?");
+        $stmt->execute([$login]);
+        $user = $stmt->fetch();
+
+        if ($user && password_verify($password, $user['password'])) {
+            // Если пользователь найден и пароль совпадает, осуществляем переход на страницу личного кабинета
+            header("Location: cabinet.php");
+            exit();
+        } else {
+            // Если пользователь не найден или пароль не совпадает, выводим ошибку
+            echo "Неправильный логин или пароль";
+        }
+    } else {
+        // В случае отсутствия данных в $_POST добавляем ошибку
+        echo "Missing POST data";
+    }
+}
 ?>
 
 <section class="auth">

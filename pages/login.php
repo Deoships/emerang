@@ -13,8 +13,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $user = $stmt->fetch();
 
         if ($user && password_verify($password, $user['password'])) {
-            // Если пользователь найден и пароль совпадает, осуществляем переход на страницу личного кабинета
-            header("Location: cabinet.php");
+            // Если пользователь найден и пароль совпадает, перенаправляем с помощью JavaScript
+            echo "<script>window.location.href='../pages/account.php';</script>";
             exit();
         } else {
             // Если пользователь не найден или пароль не совпадает, выводим ошибку

@@ -1,26 +1,24 @@
 <?php
+session_start();
 include '../includes/header.php';
 include '../config/db.php';
 
-// Запрос к базе данных для получения данных пользователя
-$sql = "SELECT first_name, last_name, email, telephone FROM user WHERE id_user = 21";
-$result = $pdo->query($sql); // Используем объект PDO $pdo
-
-if ($result) { // Проверяем, успешно ли выполнен запрос
-    // Вывод данных пользователя
-    $user = $result->fetch(PDO::FETCH_ASSOC); // Получаем данные пользователя в виде ассоциативного массива
-    if ($user) {
-        $first_name = $user["first_name"];
-        $last_name = $user["last_name"];
-        $email = $user["email"];
-        $phone = $user["telephone"];
-    } else {
-        echo "Пользователь не найден";
-    }
-} else {
-    echo "Ошибка выполнения запроса: " . $pdo->errorInfo()[2];
+// Проверяем, если пользователь не авторизован, перенаправляем на страницу логина
+if (!isset($_SESSION['user'])) {
+    header("Location: ../pages/login.php");
+    exit();
 }
+
+// Получаем данные пользователя из сессии
+$user = $_SESSION['user'];
+
+// Проверяем, что у пользователя есть имя и фамилия
+$first_name = isset($user['first_name']) ? $user['first_name'] : '';
+$last_name = isset($user['last_name']) ? $user['last_name'] : '';
+$email = isset($user['email']) ? $user['email'] : '';
+$telephone = isset($user['telephone']) ? $user['telephone'] : '';
 ?>
+
 
 <section>
     <div class="wrap">
@@ -37,7 +35,7 @@ if ($result) { // Проверяем, успешно ли выполнен за�
             <div class="account-info">
                 <h2 class="index-h2"><?php echo $first_name . " " . $last_name; ?></h2>
                 <p class="contact-p">Почта: <b><?php echo $email; ?></b></p>
-                <p class="contact-p">Телефон: <b><?php echo $phone; ?></b></p>
+                <p class="contact-p">Телефон: <b><?php echo $telephone; ?></b></p>
                 <button class="button-edit" type="button">Изменить пароль</button>
             </div>
             <div class="account-exit"></div>

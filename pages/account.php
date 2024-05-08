@@ -1,5 +1,16 @@
 <?php
 session_start();
+
+// Проверяем, если пользователь нажал на кнопку "Выход"
+if (isset($_POST['logout'])) {
+    // Уничтожаем сессию
+    session_destroy();
+
+    // Перенаправляем пользователя на страницу авторизации
+    header("Location: ../pages/login.php");
+    exit();
+}
+
 include '../includes/header.php';
 include '../config/db.php';
 
@@ -19,7 +30,6 @@ $email = isset($user['email']) ? $user['email'] : '';
 $telephone = isset($user['telephone']) ? $user['telephone'] : '';
 ?>
 
-
 <section>
     <div class="wrap">
         <h1 class="catalog-h1">Ваш профиль</h1>
@@ -38,8 +48,9 @@ $telephone = isset($user['telephone']) ? $user['telephone'] : '';
                 <p class="contact-p">Телефон: <b><?php echo $telephone; ?></b></p>
                 <button class="button-edit" type="button">Изменить пароль</button>
             </div>
-            <div class="account-exit"></div>
-            <button class="back-btn">Выход</button>
+            <form method="post">
+                <button class="back-btn" name="logout">Выход</button>
+            </form>
         </div>
         <!-- Карточка товара -->
         <div class="account-cart">

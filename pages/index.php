@@ -1,6 +1,21 @@
 <?php
+session_start(); // Начинаем сессию пользователя
+
+// Проверяем, был ли пользователь авторизован
+if (isset($_SESSION['user_id'])) {
+    // Здесь можно добавить код, связанный с установкой user_id в сессию
+    // Например, что-то вроде:
+    $user_id = $_SESSION['user_id'];
+} else {
+    // Если пользователь не авторизован, можно присвоить user_id значение по умолчанию
+    // Например, что-то вроде:
+    $user_id = 0; // Значение по умолчанию для неавторизованных пользователей
+}
+
 include '../includes/header.php';
 include '../config/db.php';
+
+
 
 $stmt = $pdo->prepare("SELECT p.id_product, p.name, p.price, t.name as type_name, c.name as color_name, MIN(i.url) as url
 FROM product p
@@ -64,14 +79,17 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 // Получаем цвет товара для передачи в URL-адресе
                 $color = urlencode($product['color_name']);
                 ?>
-                <a href="../pages/product.php?id=<?= $product['id_product'] ?>&color=<?= $color ?>" class="product-card">
+                <div class="product-card">
+                <a href="../pages/product.php?id=<?= $product['id_product'] ?>&color=<?= $color ?>">
                     <img src="<?= $product['url'] ?>" alt="<?= $product['name'] ?>">
                     <h3><?= $product['name'] ?></h3>
+                 
                     <div class="product-info">
                         <p class="price"><?= $product['price'] ?> р.</p>
+                           </a> 
                         <button class="add-to-cart-btn" data-product-id="<?= $product['id_product'] ?>"></button>
                     </div>
-                </a>
+               </div>
             <?php endforeach; ?>
         </div>
     </div>
@@ -94,18 +112,23 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 // Получаем цвет товара для передачи в URL-адресе
                 $color = urlencode($product['color_name']);
                 ?>
-                <a href="../pages/product.php?id=<?= $product['id_product'] ?>&color=<?= $color ?>" class="product-card">
+                <div class="product-card">
+                <a href="../pages/product.php?id=<?= $product['id_product'] ?>&color=<?= $color ?>">
                     <img src="<?= $product['url'] ?>" alt="<?= $product['name'] ?>">
                     <h3><?= $product['name'] ?></h3>
+                 
                     <div class="product-info">
                         <p class="price"><?= $product['price'] ?> р.</p>
+                           </a> 
                         <button class="add-to-cart-btn" data-product-id="<?= $product['id_product'] ?>"></button>
                     </div>
-                </a>
+               </div>
             <?php endforeach; ?>
         </div>
     </div>
 </section>
+
+<script src="../js/add_to_cart.js"></script>
 
 <?php
 include '../includes/footer.php';

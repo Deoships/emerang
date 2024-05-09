@@ -30,6 +30,11 @@
     padding: 10px;
 }
 
+.button-save{
+    @include button-styles;
+    padding: 10px;
+}
+
 .comment-field {
     width:100%;
 height: 108px;
@@ -52,6 +57,15 @@ resize: none;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+
+.form-group-input {
+    height: 44px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
 }
 
 

@@ -7,7 +7,7 @@ if (isset($_POST['logout'])) {
     session_destroy();
 
     // Перенаправляем пользователя на страницу авторизации
-    header("Location: ../pages/login.php");
+    echo '<script>window.location.href = "../pages/login.php";</script>';
     exit();
 }
 
@@ -16,11 +16,11 @@ include '../config/db.php';
 
 // Проверяем, если пользователь не авторизован, перенаправляем на страницу логина
 if (!isset($_SESSION['user'])) {
-    header("Location: ../pages/login.php");
+    echo '<script>window.location.href = "../pages/login.php";</script>';
     exit();
 }
 
-// Получаем данные пользователя из сессии
+$user_id = $_SESSION['user_id'];
 $user = $_SESSION['user'];
 
 // Проверяем, что у пользователя есть имя и фамилия
@@ -28,6 +28,26 @@ $first_name = isset($user['first_name']) ? $user['first_name'] : '';
 $last_name = isset($user['last_name']) ? $user['last_name'] : '';
 $email = isset($user['email']) ? $user['email'] : '';
 $telephone = isset($user['telephone']) ? $user['telephone'] : '';
+
+// Проверяем, если был отправлен новый пароль
+if (isset($_POST['new-password'])) {
+    $new_password = $_POST['new-password'];
+    
+    // Хешируем новый пароль перед сохранением в базу данных
+    $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
+
+    // Подготавливаем SQL-запрос для обновления пароля пользователя
+    $update_password_query = "UPDATE user SET password = ? WHERE id_user = ?";
+    $stmt = $pdo->prepare($update_password_query);
+    
+    // Выполняем запрос с учетом параметров
+    $stmt->execute([$hashed_password, $user_id]);
+    
+    // Перенаправляем пользователя на страницу профиля после сохранения пароля
+    echo '<script>window.location.href = "../pages/account.php";</script>';
+    exit();
+}
+
 ?>
 
 <section>
@@ -46,6 +66,12 @@ $telephone = isset($user['telephone']) ? $user['telephone'] : '';
                 <h2 class="index-h2"><?php echo $first_name . " " . $last_name; ?></h2>
                 <p class="contact-p">Почта: <b><?php echo $email; ?></b></p>
                 <p class="contact-p">Телефон: <b><?php echo $telephone; ?></b></p>
+                <form method="post"> <!-- Добавлен атрибут method="post" -->
+                    <div id="change-password" class="form-group-eddit" style="display: none;">
+                        <input type="password" class="form-group-input" id="new-password" name="new-password" placeholder="Введите новый пароль">
+                        <button id="save-password" class="button-save" type="submit">Сохранить пароль</button> <!-- Изменен тип кнопки на submit -->
+                    </div>
+                </form>
                 <button class="button-edit" type="button">Изменить пароль</button>
             </div>
             <form method="post">
@@ -99,6 +125,32 @@ $telephone = isset($user['telephone']) ? $user['telephone'] : '';
       </div>
     </div>
 </section>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Находим кнопку "Изменить пароль"
+    var changePasswordButton = document.querySelector(".button-edit");
+
+    // Находим поле для ввода нового пароля
+    var changePasswordDiv = document.getElementById("change-password");
+
+    // Находим кнопку "Сохранить пароль"
+    var savePasswordButton = document.getElementById("save-password");
+
+    // При клике на кнопку "Изменить пароль"
+    changePasswordButton.addEventListener("click", function() {
+        // Показываем поле для ввода нового пароля
+        changePasswordDiv.style.display = "block";
+    });
+
+    // При клике на кнопку "Сохранить пароль"
+    savePasswordButton.addEventListener("click", function() {
+        // Скрываем поле для ввода нового пароля после сохранения
+        changePasswordDiv.style.display = "none";
+        // TODO: Добавьте код для сохранения нового пароля на сервере
+    });
+});
+</script>
 
 <?php
 include '../includes/footer.php';

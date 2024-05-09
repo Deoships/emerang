@@ -12,23 +12,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'], $_POST['passw
     $login = $_POST['login'];
     $password = $_POST['password'];
 
-    // Проверка логина и пароля в базе данных
     $stmt = $pdo->prepare("SELECT * FROM user WHERE login = ?");
     $stmt->execute([$login]);
     $user = $stmt->fetch();
-
+    
     if ($user && password_verify($password, $user['password'])) {
-        // Сохраняем данные пользователя в сессии
+        // Сохраняем данные пользователя в сессию
+        $_SESSION['user_id'] = $user['id_user'];
         $_SESSION['user'] = $user;
-
+        
         // Перенаправляем пользователя на страницу аккаунта
-        if (isset($_SESSION['redirect'])) {
-            $redirect = $_SESSION['redirect'];
-            unset($_SESSION['redirect']);
-            redirectTo($redirect);
-        } else {
-            redirectToAccount();
-        }
+        redirectToAccount();
     } else {
         // Если пользователь не найден или пароль не совпадает, выводим ошибку
         echo "<script>alert('Неправильный логин или пароль');</script>";
@@ -37,11 +31,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'], $_POST['passw
 
 function redirectToAccount() {
     echo "<script>window.location.href = '../pages/account.php';</script>";
-    exit();
-}
-
-function redirectTo($url) {
-    echo "<script>window.location.href = '$url';</script>";
     exit();
 }
 ?>

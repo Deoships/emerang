@@ -1,4 +1,17 @@
 <?php
+session_start(); // Начинаем сессию пользователя
+
+// Проверяем, был ли пользователь авторизован
+if (isset($_SESSION['user_id'])) {
+    // Здесь можно добавить код, связанный с установкой user_id в сессию
+    // Например, что-то вроде:
+    $user_id = $_SESSION['user_id'];
+} else {
+    // Если пользователь не авторизован, можно присвоить user_id значение по умолчанию
+    // Например, что-то вроде:
+    $user_id = 0; // Значение по умолчанию для неавторизованных пользователей
+}
+
 function getCategoryClass($category) {
     $currentCategory = isset($_GET['category']) ? $_GET['category'] : '1';
     return ($category == $currentCategory) ? 'active' : '';
@@ -46,20 +59,23 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 // Получаем цвет товара для передачи в URL-адресе
                 $color = urlencode($product['color_name']);
                 ?>
-                <a href="../pages/product.php?id=<?= $product['id_product'] ?>&color=<?= $color ?>" class="product-card <?= getCategoryClass($product['id_type'] ?? '') ?>">
+                <div class="product-card">
+                <a href="../pages/product.php?id=<?= $product['id_product'] ?>&color=<?= $color ?>">
                     <img src="<?= $product['url'] ?>" alt="<?= $product['name'] ?>">
                     <h3><?= $product['name'] ?></h3>
+                 
                     <div class="product-info">
                         <p class="price"><?= $product['price'] ?> р.</p>
+                           </a> 
                         <button class="add-to-cart-btn" data-product-id="<?= $product['id_product'] ?>"></button>
-
                     </div>
-                </a>
+               </div>
             <?php endforeach; ?>
         </div>
     </div>
 
 <script src="../js/menu.js"></script>
+<script src="../js/add_to_cart.js"></script>
 
 </section>
 

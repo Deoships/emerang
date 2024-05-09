@@ -1,6 +1,16 @@
 <?php
-// Начинаем сессию
-session_start();
+session_start(); // Начинаем сессию пользователя
+
+// Проверяем, был ли пользователь авторизован
+if (isset($_SESSION['user_id'])) {
+    // Здесь можно добавить код, связанный с установкой user_id в сессию
+    // Например, что-то вроде:
+    $user_id = $_SESSION['user_id'];
+} else {
+    // Если пользователь не авторизован, можно присвоить user_id значение по умолчанию
+    // Например, что-то вроде:
+    $user_id = 0; // Значение по умолчанию для неавторизованных пользователей
+}
 
 // Включаем файлы header.php и footer.php
 
@@ -127,9 +137,7 @@ $similar_products = $stmt_similar_products->fetchAll(PDO::FETCH_ASSOC);
                         <?php endforeach; ?>
                     </ul>
                 </div>
-                <button class="buy-btn" onclick="addToCart(<?= $product['id_product'] ?>, '<?= $product['name'] ?>', <?= $product['price'] ?>)">
-    Приобрести
-</button>
+                <button class="buy-btn add-to-cart-btn" data-product-id="<?= $product['id_product'] ?>">Приобрести</button>
             </div>
             </div>
         </div>
@@ -168,16 +176,20 @@ $similar_products = $stmt_similar_products->fetchAll(PDO::FETCH_ASSOC);
 <div class="block-2">
     <h2 class="index-h2">Похожие товары</h2>
     <div class="product-cards">
-        <?php foreach ($similar_products as $similar_product): ?>
-            <a href="../pages/product.php?id=<?= $similar_product['id_product'] ?>&color=<?= urlencode($similar_product['color_name']) ?>" class="product-card">
-                <img src="<?= $similar_product['url'] ?>" alt="<?= $similar_product['name'] ?>">
-                <h3><?= $similar_product['name'] ?></h3>
-                <div class="product-info">
-                    <p class="price"><?= $similar_product['price'] ?> р.</p>
-                    <button class="add-to-cart-btn" data-product-id="<?= $similar_product['id_product'] ?>"></button>
-                </div>
-            </a>
-        <?php endforeach; ?>
+    <?php foreach ($similar_products as $similar_product): ?>
+    <div class="product-card">
+        <a href="../pages/product.php?id=<?= $similar_product['id_product'] ?>&color=<?= urlencode($similar_product['color_name']) ?>" class="product-card-link">
+            <img src="<?= $similar_product['url'] ?>" alt="<?= $similar_product['name'] ?>">
+            <h3><?= $similar_product['name'] ?></h3>
+            <div class="product-info">
+                <p class="price"><?= $similar_product['price'] ?> р.</p>
+           
+        </a>
+        <button class="add-to-cart-btn" data-product-id="<?= $product['id_product'] ?>"></button>
+         </div>
+    </div>
+<?php endforeach; ?>
+
     </div>
 </div>
 
@@ -206,14 +218,18 @@ if (!empty($_SESSION['previously_viewed_products'])) {
             $previously_viewed_product_info = $stmt_product->fetch(PDO::FETCH_ASSOC);
 
             if ($previously_viewed_product_info): ?>
-                <a href="../pages/product.php?id=<?= $previously_viewed_product_info['id_product'] ?>&color=<?= urlencode($previously_viewed_product_info['color_name']) ?>" class="product-card">
-                    <img src="<?= $previously_viewed_product_info['url'] ?>" alt="<?= $previously_viewed_product_info['name'] ?>">
-                    <h3><?= $previously_viewed_product_info['name'] ?></h3>
-                    <div class="product-info">
-                        <p class="price"><?= $previously_viewed_product_info['price'] ?> р.</p>
-                        <button class="add-to-cart-btn" data-product-id="<?= $previously_viewed_product_info['id_product'] ?>"></button>
-                    </div>
-                </a>
+                <div class="product-card">
+                    <a href="../pages/product.php?id=<?= $previously_viewed_product_info['id_product'] ?>&color=<?= urlencode($previously_viewed_product_info['color_name']) ?>" class="product-card-link">
+                        <img src="<?= $previously_viewed_product_info['url'] ?>" alt="<?= $previously_viewed_product_info['name'] ?>">
+                        <h3><?= $previously_viewed_product_info['name'] ?></h3>
+                        <div class="product-info">
+                            <p class="price"><?= $previously_viewed_product_info['price'] ?> р.</p>
+                      
+                    </a>
+                      
+                    <button class="add-to-cart-btn" data-product-id="<?= $previously_viewed_product_info['id_product'] ?>"></button>
+                </div>
+                </div>
             <?php endif; ?>
         <?php endforeach; ?>
     </div>
@@ -222,7 +238,7 @@ if (!empty($_SESSION['previously_viewed_products'])) {
 }
 ?>
 </section>
-
+<script src="../js/add_to_cart.js"></script>
 <script>
     function goBack() {
         window.history.back();

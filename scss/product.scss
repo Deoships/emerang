@@ -180,6 +180,27 @@ background: var(--FFF, #FFF);
     width: 100%;
 }
 
+.buy-btn.buy-btn.add-to-cart-btn {
+    @include button-styles;
+    width: 230px;
+}
+
+.add-to-cart-btn {
+    background-color: rgba(255, 255, 255, 0); 
+    border: none; 
+}
+
+.add-to-cart-btn {
+    background: url('../img/cart.png') no-repeat; // Исходное изображение
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+
+    &:hover {
+        background: url('../img/cart_ful.png') no-repeat; // Изображение при наведении
+    }
+}
+
 // АДАПТИВ
 
 @media (max-width: 1258px) {

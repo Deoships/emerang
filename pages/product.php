@@ -224,10 +224,8 @@ if (!empty($_SESSION['previously_viewed_products'])) {
                         <h3><?= $previously_viewed_product_info['name'] ?></h3>
                         <div class="product-info">
                             <p class="price"><?= $previously_viewed_product_info['price'] ?> р.</p>
-                      
-                    </a>
-                      
-                    <button class="add-to-cart-btn" data-product-id="<?= $previously_viewed_product_info['id_product'] ?>"></button>
+                    </a>              
+                  <button class="add-to-cart-btn" data-product-id="<?= $previously_viewed_product_info['id_product'] ?>"></button>
                 </div>
                 </div>
             <?php endif; ?>

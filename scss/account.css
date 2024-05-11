@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .wrap {
   font-size: 14px;
   color: #212121;
@@ -7,15 +8,37 @@
 }
 
 .account {
-  margin: 0 auto;
-  width: 60%;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   background-color: #ffffff;
+}
+
+.account-1 {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  background-color: #ffffff;
+}
+
+.account {
+  margin: 0 auto;
+  width: 60%;
   padding: 20px 25px;
   border-radius: 6px;
   margin-bottom: 70px;
+}
+
+.account-1 {
+  margin: 0 auto;
+  padding: 20px 25px;
+  border-radius: 6px;
+  margin-bottom: 70px;
+}
+
+.account-foto img {
+  height: 100px;
+  margin: 0px 30px;
 }
 
 .account-cart {
@@ -24,6 +47,61 @@
   width: 60%;
   padding: 20px 25px;
   border-radius: 6px;
+}
+
+.account-name {
+  width: 950px;
+}
+
+.account-count {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  width: 100%;
+}
+
+.count {
+  margin-left: 55%;
+  width: 54px;
+  height: 44px;
+  /* Автолейаут */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid rgba(33, 33, 33, 0.4);
+  border-radius: 6px;
+}
+
+.count-btn {
+  font-size: 14px;
+  color: #212121;
+  font-weight: 400;
+  line-height: 24px;
+  font-family: "Montserrat", Arial, sans-serif;
+  background: none;
+  color: inherit;
+  border: none;
+  cursor: pointer;
+  outline: inherit;
+}
+.count-btn:hover {
+  color: #42da96;
+}
+
+.account-delete {
+  margin-left: 5%;
+}
+
+.account-price {
+  margin-top: 30px;
+  font-size: 18px;
+  color: #212121;
+  font-weight: 400;
+  line-height: 24px;
+  font-family: "Montserrat", Arial, sans-serif;
 }
 
 .button-edit {

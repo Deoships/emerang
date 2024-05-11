@@ -48,6 +48,22 @@ if (isset($_POST['new-password'])) {
     exit();
 }
 
+// Запрос для получения информации о товарах в корзине пользователя
+$stmt = $pdo->prepare("
+SELECT ci.quantity, p.name AS product_name, p.price, img.url AS image_url
+FROM cart_item ci 
+INNER JOIN product p ON ci.id_product = p.id_product 
+INNER JOIN cart c ON ci.id_cart = c.id_cart 
+INNER JOIN (
+    SELECT id_product, MIN(url) AS url
+    FROM img
+    GROUP BY id_product
+) img ON img.id_product = p.id_product
+WHERE c.id_user = ?
+");
+$stmt->execute([$user_id]);
+$cart_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 
 <section>
@@ -78,51 +94,54 @@ if (isset($_POST['new-password'])) {
                 <button class="back-btn" name="logout">Выход</button>
             </form>
         </div>
-        <!-- Карточка товара -->
         <div class="account-cart">
-            <div class="account">
-                <div class="account-foto"></div>
-                <div class="account-details">
-                    <div class="account-name">Название товара</div>
-                    <div class="account-price">Цена: $10.00</div>
+            <?php foreach ($cart_items as $item): ?>
+                <!-- Карточка товара -->
+                <div class="account-1">
+                            <div class="account-foto"><img src="<?= $item['image_url'] ?>" alt="<?= $item['product_name'] ?>"></div>
+                    <div class="account-wrap">
+            
+                    <div class="account-details">
+                        <div class="account-name"><b><?= $item['product_name'] ?></b></div>
+                        
+                    </div>
+                    <div class="account-count">
+                        <div class="account-price"><?= $item['price'] ?> р.</div>
+                    <div class="count">
+                        <button class="count-btn">-</button>
+                        <span class="count-value"><?= $item['quantity'] ?></span>
+                        <button class="count-btn">+</button>
+                    </div>
+                    <div class="account-delete">
+                        <!-- Кнопка удаления товара -->
+                        <svg width="21.000000" height="20.000000" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+	<path id="Vector" d="M2.32 4.65L3.63 14.62C3.93 16.86 4.65 18.5 7.31 18.5L12.92 18.5C15.81 18.5 16.24 16.93 16.57 14.76L18.13 4.65M0 4.19L2.87 3.93C7.76 3.49 12.69 3.5 17.58 3.96L20 4.19M5.11 3.57C5.11 2.09 6.24 0.85 7.72 0.72L8.61 0.64C9.69 0.54 10.77 0.54 11.84 0.64L12.74 0.72C14.21 0.85 15.34 2.09 15.34 3.57" stroke="#EF1212" stroke-opacity="1.000000" stroke-width="1.500000"/>
+</svg>
+                    </div>
                 </div>
-                <div class="account-count">
-                    <button class="count-btn">-</button>
-                    <span class="count-value">1</span>
-                    <button class="count-btn">+</button>
                 </div>
-                <div class="account-delete">
-                    <!-- Кнопка удаления товара -->
-                    <svg width="24.000000" height="24.000000" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                        <defs>
-                            <clipPath id="clip17_4531">
-                                <rect id="иконка-минус" width="24.000000" height="24.000000" transform="translate(0.000000 -0.500000)" fill="white" fill-opacity="0"/>
-                            </clipPath>
-                        </defs>
-                        <g clip-path="url(#clip17_4531)">
-                            <path id="Vector" d="M4.32 6.65L5.63 16.62C5.93 18.86 6.65 20.5 9.31 20.5L14.92 20.5C17.81 20.5 18.24 18.93 18.57 16.76L20.13 6.65M2 6.19L4.87 5.93C9.76 5.49 14.69 5.5 19.58 5.96L22 6.19M7.11 5.57C7.11 4.09 8.24 2.85 9.72 2.72L10.61 2.64C11.69 2.54 12.77 2.54 13.84 2.64L14.74 2.72C16.21 2.85 17.34 4.09 17.34 5.57" stroke="#EF1212" stroke-opacity="1.000000" stroke-width="1.500000"/>
-                        </g>
-                    </svg>
+                    
                 </div>
-                
+            <?php endforeach; ?>
+            <!-- Добавьте код для комментариев и блока оплаты здесь -->
+            <textarea class="comment-field" placeholder="Ваш комментарий к заказу"></textarea>
+            <div class="account-pay">
+                <div class="payment-radio">
+                    <p class="catalog-p"><b>Выбор оплаты:</b></p> 
+                    <input type="radio" id="card-payment" name="payment-method" value="card">
+                    <label for="card-payment">Карточкой через терминал VISA, Master Card, Belcard</label><br>
+                    <input type="radio" id="cash-payment" name="payment-method" value="cash">
+                    <label for="cash-payment">Оплата наличными</label>
+                </div>
+                <div class="total">
+                    <p><b>Итого к оплате:</b></p>
+                    <!-- Добавьте вывод общей суммы заказа -->
+                    <h2><b>$10.00</b></h2>
+                    <button class="button">Оплатить</button>
+                </div>
             </div>
-             <textarea class="comment-field" placeholder="Ваш комментарий к заказу"></textarea>
-      
-     <div class="account-pay">
-        <div class="payment-radio">
-                <p class="catalog-p"><b>Выбор оплаты:</b></p> 
-            <input type="radio" id="card-payment" name="payment-method" value="card">
-            <label for="card-payment">Карточкой через терминал VISA, Master Card, Belcard</label><br>
-            <input type="radio" id="cash-payment" name="payment-method" value="cash">
-            <label for="cash-payment">Оплата наличными</label>
         </div>
-        <div class="total">
-            <p><b>Итого к оплате:</b></p>
-            <h2><b>$10.00</b></h2>
-            <button class="button">Оплатить</button>
-        </div>
-    </div>
-      </div>
     </div>
 </section>
 
@@ -151,6 +170,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 </script>
+
 
 <?php
 include '../includes/footer.php';

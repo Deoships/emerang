@@ -92,7 +92,16 @@
 }
 
 .account-delete {
-  margin-left: 5%;
+  background: none;
+  color: inherit;
+  border: none;
+  margin-left: 50%;
+  outline: inherit;
+}
+
+.account-delete svg:hover {
+  cursor: pointer;
+  fill: #EF1212; /* изменение цвета заливки при наведении */
 }
 
 .account-price {

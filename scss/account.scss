@@ -3,6 +3,7 @@
 
 .wrap {
     @include heading-styles(14px, $dtc);
+    padding: 70px 170px;
 }
 
 .account {

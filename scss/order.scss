@@ -1,0 +1,133 @@
+@import 'variables';
+@import 'mixins';
+
+.wrap-order {
+  padding: 0px 275px;
+  
+}
+
+.wrap-order h1 {
+  padding: 70px 0px;
+}
+
+.back-btn {
+  margin-bottom: 10px;
+}
+
+.order-details-page {
+  @include heading-styles(14px, $dtc);
+    display: flex;
+    justify-content: center;
+    padding: 0px 170px 70px 170px;
+  
+    .order-info {
+      width: 255px;
+      height: 340px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 6px;
+  
+      .info-item {
+        display: flex;
+        justify-content: flex-start;
+        margin-bottom: 10px;
+  
+        .info-label {
+          font-weight: bold;
+        }
+  
+        .info-value {
+          margin-left: 10px;
+          color: #666;
+        }
+      }
+    }
+  
+    .order-items {
+      margin-left: 30px;
+      width:40%;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 6px;
+  
+      h2 {
+        margin-bottom: 20px;
+      }
+  
+      .item {
+        @include heading-styles(14px, $dtc);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20px;
+
+      }
+  
+        img {
+          width: 60px;
+          height: 60px;
+
+          object-fit: contain; /* Изменено с cover на contain */
+          max-width: 100%; /* Устанавливает максимальную ширину изображения */
+          max-height: 100%; /* Устанавливает максимальную высоту изображения */
+        }
+  
+        .item-info {
+          display: flex;
+          flex-direction: column;
+  
+          .item-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+          }
+  
+          .item-price {
+            color: #666;
+            @include heading-styles(18px, $dtc);
+          }
+        }
+      }
+  
+      .buttons {
+        display: flex;
+        justify-content:flex-end;
+        margin-top: 30px;
+  
+        .button {
+          padding: 10px 20px;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          font-size: 16px;
+  
+          &.status {
+            @include button-styles;
+            background-color: black;
+            cursor: default;
+
+            &:hover {
+              background-color: black;
+            }
+          }
+
+          &.approve {
+            @include button-styles;
+            
+          }
+  
+          &.decline {
+            @include button-styles;
+            background-color: #000000;
+            color: #ffffff;
+            margin-right: 10px;
+            cursor: default;
+
+            &:hover {
+              background-color: black;
+            }
+          }
+        }
+      }
+    }
+  
+  

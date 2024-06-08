@@ -1,0 +1,31 @@
+.admin {
+  font-family: "Montserrat", Arial, sans-serif;
+  padding: 100px 0px;
+  background-color: #f3f2ed;
+}
+
+.admin-container {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+form {
+  background-color: #fff;
+  border-radius: 6px;
+  padding: 40px 30px;
+  margin-right: 20px;
+}
+
+.alert {
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  margin-bottom: 15px;
+  border-radius: 5px;
+}
+
+.alert-success {
+  background-color: #4CAF50;
+}/*# sourceMappingURL=admin.css.map */

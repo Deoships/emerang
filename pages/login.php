@@ -30,7 +30,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'], $_POST['passw
 }
 
 function redirectToAccount() {
-    echo "<script>window.location.href = '../pages/account.php';</script>";
+    // Получаем информацию о пользователе из сессии
+    $user = $_SESSION['user'];
+
+    // Проверяем роль пользователя и перенаправляем в зависимости от роли
+    if ($user['id_role'] == 1) {
+        // Перенаправляем на страницу администратора
+        echo "<script>window.location.href = '../admin/admin.php';</script>";
+    } elseif ($user['id_role'] == 2) {
+        // Перенаправляем на страницу менеджера
+        echo "<script>window.location.href = '../pages/manager.php';</script>";
+    } else {
+        // По умолчанию перенаправляем на страницу аккаунта
+        echo "<script>window.location.href = '../pages/account.php';</script>";
+    }
     exit();
 }
 ?>
@@ -40,10 +53,10 @@ function redirectToAccount() {
         <h3 class="form-h3">Авторизация</h3>
         <form method="post">
             <div class="form-group">
-                <input type="text" name="login" placeholder="Логин">
+                <input type="text" name="login" placeholder="Логин" required>
             </div>
             <div class="form-group">
-                <input type="password" name="password" placeholder="Пароль">
+                <input type="password" name="password" placeholder="Пароль" required>
             </div>
             <div class="btn-container">
                 <button class="button-log" onclick="redirectToRegistrPage()" type="button">Зарегистрироваться</button>
@@ -61,5 +74,4 @@ function redirectToAccount() {
 
 <?php
 include '../includes/footer.php';
-ob_end_flush();
 ?>

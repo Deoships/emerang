@@ -3,7 +3,7 @@ const thumbnailSlides = document.querySelectorAll('.thumbnail-slide');
 const prevButton = document.querySelector('.prev');
 const nextButton = document.querySelector('.next');
 
-let imagesByColor = {}; // Объект для хранения массива изображений по цветам
+let imagesByColor = {}; 
 
 function changeMainImage(imageUrl) {
     mainSliderImage.src = imageUrl;
@@ -19,9 +19,9 @@ function changeMainImageByColor(color) {
 function filterImagesByColor(color) {
     thumbnailSlides.forEach(function(slide) {
         if (slide.dataset.color === color) {
-            slide.style.display = 'block'; // Отображаем только нужные изображения
+            slide.style.display = 'block';
         } else {
-            slide.style.display = 'none'; // Скрываем остальные изображения
+            slide.style.display = 'none'; 
         }
     });
 }

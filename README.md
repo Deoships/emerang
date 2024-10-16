@@ -1,0 +1,1 @@
+emerang — a graduation project developed in PHP in 2024. The main goal is to create a functional online store where users can browse and order products. The project focuses on the server side, including data processing and interaction with the database
